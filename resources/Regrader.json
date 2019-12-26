@@ -1,0 +1,6 @@
+{
+    "150": { "type": "png", "file": "background.png" },
+    "151": { "type": "png", "file": "slider_background.png" },
+    "152": { "type": "png", "file": "slider_handle.png" },
+    "153": { "type": "png", "file": "slider_handle_2.0x.png" }
+}
