@@ -71,7 +71,7 @@ Flanger::~Flanger()
     delete _mixFilter;
 
     while ( _buffers.size() > 0 ) {
-        delete _buffers.back();
+        delete[] _buffers.back();
         _buffers.pop_back();
     }
 }

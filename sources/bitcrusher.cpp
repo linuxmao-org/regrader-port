@@ -32,6 +32,12 @@ namespace Igorski {
 
 BitCrusher::BitCrusher( float amount, float inputMix, float outputMix, float sampleRate )
 {
+    // jpc: resolve use of uninitialized memory
+    hasLFO = false;
+    _amount = 0;
+    _tempAmount = 0;
+    _lfoDepth = 0;
+
     setAmount   ( amount );
     setInputMix ( inputMix );
     setOutputMix( outputMix );
@@ -39,7 +45,6 @@ BitCrusher::BitCrusher( float amount, float inputMix, float outputMix, float sam
     _tempAmount = _amount;
 
     lfo = new LFO( sampleRate );
-    hasLFO = false;
 }
 
 BitCrusher::~BitCrusher()
