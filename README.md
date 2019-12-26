@@ -1,5 +1,7 @@
 # Regrader
 
+[![Build Status](https://travis-ci.com/linuxmao-org/regrader.svg?branch=master)](https://travis-ci.com/linuxmao-org/regrader)
+
 A delay effect where the repeats degrade in resolution
 
 ## About
