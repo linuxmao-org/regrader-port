@@ -28,6 +28,8 @@
 #define DISTRHO_PLUGIN_NAME  "Regrader"
 #define DISTRHO_PLUGIN_URI   "https://github.com/linuxmao-org/regrader"
 
+#define DISTRHO_PLUGIN_LV2_CATEGORY "lv2:DelayPlugin"
+
 #define DISTRHO_PLUGIN_HAS_UI        1
 #define DISTRHO_UI_USE_NANOVG        0
 
