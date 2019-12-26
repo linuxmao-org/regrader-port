@@ -43,7 +43,7 @@ namespace Igorski {
 class Flanger
 {
     public:
-        Flanger( int amountOfChannels );
+        Flanger( int amountOfChannels, float sampleRate );
         ~Flanger();
 
         float getRate();
@@ -97,6 +97,8 @@ class Flanger
 
         int FLANGER_BUFFER_SIZE;
         float SAMPLE_MULTIPLIER;
+
+        float _sampleRate;
 
         void calculateSweep();
 };

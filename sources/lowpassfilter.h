@@ -30,7 +30,7 @@ namespace Igorski {
 class LowPassFilter
 {
     public:
-        LowPassFilter( float cutoff );
+        LowPassFilter( float cutoff, float sampleRate );
         ~LowPassFilter();
 
         float getCutoff();
@@ -51,6 +51,8 @@ class LowPassFilter
         float a0, a1, a2, b0, b1, b2, w0, alpha;
 
         float _cutoff;
+
+        float _sampleRate;
 };
 }
 

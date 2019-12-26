@@ -31,7 +31,7 @@ namespace Igorski {
 class Filter {
 
     public:
-        Filter();
+        Filter( float sampleRate );
         ~Filter();
 
         void  setCutoff( float frequency );
@@ -85,6 +85,8 @@ class Filter {
         float* _in2;
         float* _out1;
         float* _out2;
+
+        float _sampleRate;
 
         void cacheLFOProperties();
 };

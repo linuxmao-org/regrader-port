@@ -29,10 +29,11 @@ namespace Igorski {
 
 /* constructor / destructor */
 
-Flanger::Flanger( int amountOfChannels ) {
+Flanger::Flanger( int amountOfChannels, float sampleRate ) {
+    _sampleRate = sampleRate;
 
-    FLANGER_BUFFER_SIZE = ( int ) (( float ) VST::SAMPLE_RATE / 5.0f );
-    SAMPLE_MULTIPLIER   = ( float ) VST::SAMPLE_RATE * 0.01f;
+    FLANGER_BUFFER_SIZE = ( int ) ( sampleRate / 5.0f );
+    SAMPLE_MULTIPLIER   = sampleRate * 0.01f;
 
     _writePointer         =
     _writePointerStored   = 0;
@@ -54,8 +55,8 @@ Flanger::Flanger( int amountOfChannels ) {
         _lastChannelSamples.push_back( 0.f );
     }
 
-    _delayFilter = new LowPassFilter( 20.f );
-    _mixFilter   = new LowPassFilter( 20.f );
+    _delayFilter = new LowPassFilter( 20.f, sampleRate );
+    _mixFilter   = new LowPassFilter( 20.f, sampleRate );
 
     setRate( 0.1f );
     setWidth( 0.5f );
@@ -225,7 +226,7 @@ void Flanger::restore()
 void Flanger::calculateSweep()
 {
     // translate sweep rate to samples per second
-    _step = ( float ) ( _sweepSamples * 2.f * _sweepRate ) / ( float ) VST::SAMPLE_RATE;
+    _step = ( float ) ( _sweepSamples * 2.f * _sweepRate ) / _sampleRate;
     _maxSweepSamples = _sweepSamples;
     _sweep = 0.f;
 }

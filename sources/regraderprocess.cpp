@@ -26,12 +26,14 @@
 
 namespace Igorski {
 
-RegraderProcess::RegraderProcess( int amountOfChannels ) {
+RegraderProcess::RegraderProcess( int amountOfChannels, float sampleRate ) {
+    _sampleRate = sampleRate;
+
     _delayTime     = 0;
     _delayMix      = .5f;
     _delayFeedback = .1f;
 
-    _delayBuffer  = new AudioBuffer( amountOfChannels, Calc::millisecondsToBuffer( MAX_DELAY_TIME_MS ));
+    _delayBuffer  = new AudioBuffer( amountOfChannels, Calc::millisecondsToBuffer( MAX_DELAY_TIME_MS, sampleRate ));
     _delayIndices = new int[ amountOfChannels ];
 
     for ( int i = 0; i < amountOfChannels; ++i ) {
@@ -39,10 +41,10 @@ RegraderProcess::RegraderProcess( int amountOfChannels ) {
     }
     _amountOfChannels = amountOfChannels;
 
-    bitCrusher = new BitCrusher( 8, .5f, .5f );
+    bitCrusher = new BitCrusher( 8, .5f, .5f, sampleRate );
     decimator  = new Decimator( 32, 0.f );
-    filter     = new Filter();
-    flanger    = new Flanger( amountOfChannels );
+    filter     = new Filter( sampleRate );
+    flanger    = new Flanger( amountOfChannels, sampleRate );
     limiter    = new Limiter( 10.f, 500.f, .6f );
 
     bitCrusherPostMix = false;
@@ -85,7 +87,7 @@ void RegraderProcess::setDelayTime( float value )
     float delayMaxInMs = ( syncDelayToHost ) ? (( 60.f / _tempo ) * _timeSigDenominator ) * 1000.f
         : MAX_DELAY_TIME_MS;
 
-    _delayTime = Calc::millisecondsToBuffer( Calc::cap( value ) * delayMaxInMs );
+    _delayTime = Calc::millisecondsToBuffer( Calc::cap( value ) * delayMaxInMs, _sampleRate );
 
     if ( syncDelayToHost )
         syncDelayTime();
@@ -136,7 +138,7 @@ void RegraderProcess::syncDelayTime()
 {
     // duration of a full measure in samples
 
-    int fullMeasureSamples = Calc::secondsToBuffer(( 60.f / _tempo ) * _timeSigDenominator );
+    int fullMeasureSamples = Calc::secondsToBuffer(( 60.f / _tempo ) * _timeSigDenominator, _sampleRate );
 
     // we allow syncing to up to 32nd note resolution
 

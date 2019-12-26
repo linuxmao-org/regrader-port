@@ -24,7 +24,8 @@
 
 namespace Igorski {
 
-LFO::LFO() {
+LFO::LFO( float sampleRate ) {
+    _sampleRate  = sampleRate;
     _rate        = VST::MIN_LFO_RATE();
     _accumulator = 0.f;
 }

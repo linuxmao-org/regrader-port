@@ -26,7 +26,8 @@
 
 namespace Igorski {
 
-Filter::Filter() {
+Filter::Filter( float sampleRate ) {
+    _sampleRate = sampleRate;
 
     _cutoff     = VST::FILTER_MIN_FREQ;
     _resonance  = VST::FILTER_MIN_RESONANCE;
@@ -43,7 +44,7 @@ Filter::Filter() {
     _b2 = 0.f;
     _c  = 0.f;
 
-    lfo = new Igorski::LFO();
+    lfo = new Igorski::LFO( sampleRate );
 
     _hasLFO = false;
 
@@ -189,7 +190,7 @@ void Filter::restore()
 
 void Filter::calculateParameters()
 {
-    _c  = 1.f / tan( VST::PI * _tempCutoff / VST::SAMPLE_RATE );
+    _c  = 1.f / tan( VST::PI * _tempCutoff / _sampleRate );
     _a1 = 1.f / ( 1.f + _resonance * _c + _c * _c );
     _a2 = 2.f * _a1;
     _a3 = _a1;

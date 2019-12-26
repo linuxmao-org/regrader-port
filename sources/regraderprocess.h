@@ -41,7 +41,7 @@ class RegraderProcess {
     const float MAX_DELAY_TIME_MS = 5000.f;
 
     public:
-        RegraderProcess( int amountOfChannels );
+        RegraderProcess( int amountOfChannels, float sampleRate );
         ~RegraderProcess();
 
         // apply effect to incoming sampleBuffer contents
@@ -95,6 +95,8 @@ class RegraderProcess {
         double _tempo;
         int32 _timeSigNumerator;
         int32 _timeSigDenominator;
+
+        float _sampleRate;
 
         // ensures the pre- and post mix buffers match the appropriate amount of channels
         // and buffer size. this also clones the contents of given in buffer into the pre-mix buffer

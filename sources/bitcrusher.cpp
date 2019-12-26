@@ -30,7 +30,7 @@ namespace Igorski {
 
 /* constructor */
 
-BitCrusher::BitCrusher( float amount, float inputMix, float outputMix )
+BitCrusher::BitCrusher( float amount, float inputMix, float outputMix, float sampleRate )
 {
     setAmount   ( amount );
     setInputMix ( inputMix );
@@ -38,7 +38,7 @@ BitCrusher::BitCrusher( float amount, float inputMix, float outputMix )
 
     _tempAmount = _amount;
 
-    lfo = new LFO();
+    lfo = new LFO( sampleRate );
     hasLFO = false;
 }
 

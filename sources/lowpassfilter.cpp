@@ -28,8 +28,9 @@ namespace Igorski {
 
 /* constructor / destructor */
 
-LowPassFilter::LowPassFilter( float cutoff )
+LowPassFilter::LowPassFilter( float cutoff, float sampleRate )
 {
+    _sampleRate = sampleRate;
     setCutoff( cutoff );
 }
 
@@ -50,7 +51,7 @@ void LowPassFilter::setCutoff( float value )
     _cutoff = value;
 
     float Q = 1.1f;
-    w0 = VST::TWO_PI * _cutoff / ( float ) VST::SAMPLE_RATE;
+    w0 = VST::TWO_PI * _cutoff / _sampleRate;
     alpha = sin(w0) / ( 2.f * Q );
     b0 =  (1.f - cos(w0)) / 2.f;
     b1 =   1.f - cos(w0);

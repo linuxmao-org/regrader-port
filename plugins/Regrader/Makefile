@@ -63,7 +63,6 @@ FILES_SHARED = \
 	sources/decimator.cpp \
 	sources/filter.cpp \
 	sources/flanger.cpp \
-	sources/global.cpp \
 	sources/lfo.cpp \
 	sources/limiter.cpp \
 	sources/lowpassfilter.cpp \

@@ -56,20 +56,15 @@ PluginRegrader::PluginRegrader()
     , fFlangerDelay( 0.f )
     , outputGain( 0.f )
 {
-    sampleRateChanged(getSampleRate());
-
-    regraderProcess = new RegraderProcess( 2 );
-
     fParameterRanges = new ParameterRangesSimple[kNumParameters];
 
     for (unsigned i = 0; i < kNumParameters; ++i) {
         Parameter param;
         SharedRegrader::InitParameter(i, param);
         fParameterRanges[i] = ParameterRangesSimple{param.ranges.def, param.ranges.min, param.ranges.max};
-        setParameterValue(i, param.ranges.def);
     }
 
-    syncModel();
+    sampleRateChanged(getSampleRate());
 }
 
 PluginRegrader::~PluginRegrader()
@@ -93,7 +88,12 @@ void PluginRegrader::initParameter(uint32_t index, Parameter& parameter) {
   Optional callback to inform the plugin about a sample rate change.
 */
 void PluginRegrader::sampleRateChanged(double newSampleRate) {
-    Igorski::VST::SAMPLE_RATE = newSampleRate;
+    regraderProcess = new RegraderProcess( 2, newSampleRate );
+
+    for (unsigned i = 0; i < kNumParameters; ++i) {
+        ParameterRangesSimple range = fParameterRanges[i];
+        setParameterValue(i, range.def);
+    }
 }
 
 /**

@@ -26,8 +26,6 @@ typedef uint64_t uint64;
 
 namespace Igorski {
 namespace VST {
-    extern float SAMPLE_RATE;
-
     maybe_unused static const float PI     = 3.141592653589793f;
     maybe_unused static const float TWO_PI = PI * 2.f;
 
