@@ -65,6 +65,11 @@ PluginRegrader::PluginRegrader()
     }
 
     sampleRateChanged(getSampleRate());
+
+    for (unsigned i = 0; i < kNumParameters; ++i) {
+        ParameterRangesSimple range = fParameterRanges[i];
+        setParameterValue(i, range.def);
+    }
 }
 
 PluginRegrader::~PluginRegrader()
@@ -90,10 +95,7 @@ void PluginRegrader::initParameter(uint32_t index, Parameter& parameter) {
 void PluginRegrader::sampleRateChanged(double newSampleRate) {
     regraderProcess = new RegraderProcess( 2, newSampleRate );
 
-    for (unsigned i = 0; i < kNumParameters; ++i) {
-        ParameterRangesSimple range = fParameterRanges[i];
-        setParameterValue(i, range.def);
-    }
+    syncModel();
 }
 
 /**
