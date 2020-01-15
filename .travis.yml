@@ -26,10 +26,10 @@ matrix:
           }
       script:
         - cross bash .travis/script-mingw.sh
-        - cp -drfv bin regrader-"$_BUILD"
-        - rm -f regrader-"$_BUILD"/README
+        - cp -drfv bin regrader-port-"$_BUILD"
+        - rm -f regrader-port-"$_BUILD"/README
         - install -d release
-        - zip -9 -r release/regrader-"$_BUILD".zip regrader-"$_BUILD"
+        - zip -9 -r release/regrader-port-"$_BUILD".zip regrader-port-"$_BUILD"
     - os: linux
       dist: bionic
       env:
@@ -46,20 +46,20 @@ matrix:
           }
       script:
         - cross bash .travis/script-mingw.sh
-        - cp -drfv bin regrader-"$_BUILD"
-        - rm -f regrader-"$_BUILD"/README
+        - cp -drfv bin regrader-port-"$_BUILD"
+        - rm -f regrader-port-"$_BUILD"/README
         - install -d release
-        - zip -9 -r release/regrader-"$_BUILD".zip regrader-"$_BUILD"
+        - zip -9 -r release/regrader-port-"$_BUILD".zip regrader-port-"$_BUILD"
     - os: osx
       osx_image: xcode9.2
       env:
         - _BUILD=macos
       script:
         - bash .travis/script-macos.sh
-        - cp -av bin regrader-"$_BUILD"
-        - rm -f regrader-"$_BUILD"/README
+        - cp -av bin regrader-port-"$_BUILD"
+        - rm -f regrader-port-"$_BUILD"/README
         - install -d release
-        - zip -9 -r release/regrader-"$_BUILD".zip regrader-"$_BUILD"
+        - zip -9 -r release/regrader-port-"$_BUILD".zip regrader-port-"$_BUILD"
     - os: linux
       dist: trusty
       env:
@@ -71,13 +71,13 @@ matrix:
         - sudo apt-get install checkinstall libcairo2-dev python
       script:
         - bash .travis/script-linux.sh
-        - cp -drfv bin regrader-"$_BUILD"
-        - rm -f regrader-"$_BUILD"/README
+        - cp -drfv bin regrader-port-"$_BUILD"
+        - rm -f regrader-port-"$_BUILD"/README
         - install -d release
-        - zip -9 -r release/regrader-"$_BUILD".zip regrader-"$_BUILD"
+        - zip -9 -r release/regrader-port-"$_BUILD".zip regrader-port-"$_BUILD"
         - echo "A delay effect where the repeats degrade in resolution" > description-pak
-        - sudo checkinstall --type=debian --install=no --default --pkgname=regrader --pkgversion="`git describe --abbrev=0 | sed 's/^v//'``git log -n 1 --pretty=format:"+%cd~git%h" --date=short master | sed 's/-//g'`" --pkgarch=amd64 --pkgrelease=0jpc1 --pkglicense=BSL-1.0 --pkggroup=sound --maintainer="jp-dev@inbox.ru" --nodoc
-        - sudo mv -f *.deb release/regrader-"$_BUILD".deb
+        - sudo checkinstall --type=debian --install=no --default --pkgname=regrader-port --pkgversion="`git describe --abbrev=0 | sed 's/^v//'``git log -n 1 --pretty=format:"+%cd~git%h" --date=short master | sed 's/-//g'`" --pkgarch=amd64 --pkgrelease=0jpc1 --pkglicense=BSL-1.0 --pkggroup=sound --maintainer="jp-dev@inbox.ru" --nodoc
+        - sudo mv -f *.deb release/regrader-port-"$_BUILD".deb
 
 before_script:
   - sed -i~ 's%/usr/local%/usr%g' plugins/*/Makefile
