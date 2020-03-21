@@ -6,7 +6,7 @@ A delay effect where the repeats degrade in resolution
 
 ## About
 
-This is a port of the Regrader plugin created by Igorski.
+This is a port of the [Regrader plugin created by Igorski](https://github.com/igorski/regrader/).
 It is based on the DISTRHO plugin framework (DPF) to provide support of
 GNU/Linux and other platforms.
 
