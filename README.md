@@ -1,6 +1,6 @@
 # Regrader
 
-[![Build Status](https://travis-ci.com/linuxmao-org/regrader.svg?branch=master)](https://travis-ci.com/linuxmao-org/regrader)
+[![Build Status](https://travis-ci.com/linuxmao-org/regrader-port.svg?branch=master)](https://travis-ci.com/linuxmao-org/regrader-port)
 
 A delay effect where the repeats degrade in resolution
 
